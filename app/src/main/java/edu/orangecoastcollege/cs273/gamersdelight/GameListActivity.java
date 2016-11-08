@@ -46,10 +46,7 @@ public class GameListActivity extends AppCompatActivity {
             Game selectedGame = (Game) selectedLayout.getTag();
             Log.i("Gamers Delight", selectedGame.toString());
             Intent detailsIntent = new Intent(this, GameDetailsActivity.class);
-            detailsIntent.putExtra("Name", selectedGame.getName());
-            detailsIntent.putExtra("Description", selectedGame.getDescription());
-            detailsIntent.putExtra("Rating", selectedGame.getRating());
-            detailsIntent.putExtra("ImageName", selectedGame.getImageName());
+            detailsIntent.putExtra("selectedGame", selectedGame);
             startActivity(detailsIntent);
         }
     }

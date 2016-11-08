@@ -1,12 +1,15 @@
 package edu.orangecoastcollege.cs273.gamersdelight;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * The <code>Game</code> class maintains information about a video game,
  * including its id number, name, description, rating and image name.
  *
  * @author Michael Paulding
  */
-public class Game {
+public class Game implements Parcelable {
 
     //Member variables
     private int mId;
@@ -147,5 +150,41 @@ public class Game {
                 ", Rating=" + mRating +
                 ", ImageName='" + mImageName + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(mId);
+        parcel.writeString(mName);
+        parcel.writeString(mDescription);
+        parcel.writeFloat(mRating);
+        parcel.writeString(mImageName);
+    }
+
+    public static final Parcelable.Creator<Game> CREATOR =
+            new Parcelable.Creator<Game>() {
+
+                @Override
+                public Game createFromParcel(Parcel parcel) {
+                    return new Game(parcel);
+                }
+
+                @Override
+                public Game[] newArray(int size) {
+                    return new Game[size];
+                }
+            };
+    private Game(Parcel source)
+    {
+        mId = source.readInt();
+        mName = source.readString();
+        mDescription = source.readString();
+        mRating = source.readFloat();
+        mImageName = source.readString();
     }
 }
