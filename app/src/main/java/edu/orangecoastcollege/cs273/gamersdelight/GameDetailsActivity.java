@@ -28,10 +28,11 @@ public class GameDetailsActivity extends AppCompatActivity {
 
 
         Intent detailsIntent = getIntent();
-        String name = detailsIntent.getStringExtra("Name");
-        String description = detailsIntent.getStringExtra("Description");
-        float rating = detailsIntent.getFloatExtra("Rating", 0.0f);
-        String imageName = detailsIntent.getStringExtra("ImageName");
+        Game selectedGame = detailsIntent.getExtras().getParcelable("selectedGame");
+        String name = selectedGame.getName();
+        String description = selectedGame.getDescription();
+        float rating = selectedGame.getRating();
+        String imageName = selectedGame.getImageName();
 
         AssetManager am = this.getAssets();
         try {
